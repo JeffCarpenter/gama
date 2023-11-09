@@ -1,8 +1,8 @@
 from enum import Enum
 from typing import Iterable, Tuple, Union
 
-from sklearn.metrics import get_scorer
-from sklearn.metrics._scorer import _ProbaScorer, _BaseScorer, SCORERS
+from sklearn.metrics import get_scorer, get_scorer_names
+from sklearn.metrics._scorer import _ProbaScorer, _BaseScorer
 
 classification_metrics = {"accuracy", "roc_auc", "average_precision", "neg_log_loss"}
 for metric in ["precision", "recall", "f1"]:
@@ -19,7 +19,7 @@ regression_metrics = {
 }
 
 all_metrics = {*classification_metrics, *regression_metrics}
-reversed_scorers = {repr(v): k for k, v in SCORERS.items()}
+reversed_scorers = {repr(get_scorer(e)): e for e in get_scorer_names()}
 
 
 class MetricType(Enum):
